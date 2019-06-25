@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>댓글 달기</h1>
+<form action="{% url 'posts:new_comment' post.id %}" method="POST">
+    {% csrf_token %}
+    <label>댓글 내용</label><br>
+    <textarea name="content"></textarea><br>
+    
+    <input type="submit" value="댓글쓰기">
+</form>
+{% endblock %}

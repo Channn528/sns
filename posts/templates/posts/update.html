@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{% url 'home' %}"><img src = "http://mblogthumb1.phinf.naver.net/20160709_244/wehira_1468076100396tPA5u_JPEG/%BF%A1%B6%D9%B5%E5%C7%CF%BF%EC%BD%BA_%BC%F6%BA%D0%B0%A1%B5%E6_%C4%DD%B6%F3%B0%D5_%BF%F6%C5%CD_%C1%A9%B8%AE_%C5%A9%B8%B2_%B5%B5%B8%AE%B8%A6_%C3%A3%BE%C6%BC%AD_00011.JPG?type=w800" width = 50 height = 50 /></a>
+
+        <form action="{% url 'posts:update' post.pk %}" method="POST">
+            {% csrf_token %}
+            <h3 style = "font-family: 'yg-jalnan'">수정하기</h3>
+            <label style = "font-family: 'S-CoreDream-3Light'">글의 제목</labe><br>
+            <input style = "font-family: 'S-CoreDream-3Light'" type="text" name="title" value="{{ post.title }}"><br>
+            
+            <label style = "font-family: 'S-CoreDream-3Light'">글의 내용</label><br>
+            <textarea style = "font-family: 'S-CoreDream-3Light'" name="content">{{ post.content }}</textarea><br>
+            
+            <input style = "font-family: 'S-CoreDream-3Light'" class="btn btn-primary" type="submit" value="수정">
+        </form>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br>
+<div class = "box" style = "text-align:center">
+    
+    {% if post.photo %}
+        <img src = "{{ post.photo.url }}" style ="width: 350px; height: 350px"/>
+    {% endif %}
+<br><br>
+    <h2>댓글</h2>
+    <p>댓글 수 : {{ post.comments.count }}개</p> <!-- related_name을 써서 가능한 부분 -->
+    <a href="{% url 'posts:new_comment' post.id %}">댓글 남기기</a> <!-- url 클릭 시 post.id를 함께 넘겨줌 -->
+    {% for comment in post.comments.all %}
+        <p>쓰니 : {{ comment.username }}</p>
+        <p>내용 : {{ comment.content }}</p>
+        {% empty %}
+        <p>댓글이 없습니다.</p>
+    {% endfor %}
+        <a style = "font-family: 'S-CoreDream-3Light'; border: 2px solid;" class="btn btn-outline-success" href="{% url 'posts:update' post.id %}"><strong>수정</strong></a>
+        <a style = "font-family: 'S-CoreDream-3Light'; border: 2px solid;" class="btn btn-outline-success" href="{% url 'posts:delete' post.id %}" data-method="POST"><strong>삭제</strong></a>
+        <br>    
+</div>
+{% endblock %}

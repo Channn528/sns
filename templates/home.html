@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+            {% csrf_token %}
+{% if user.is_authenticated %}
+<div style="text-align:right">
+    안녕 {{ user.username }}!
+  <a href="{% url 'account_logout' %}"> / logout</a><br><br>
+  <a href="{% url 'posts:new' %}">새 글 쓰기</a>
+  <br><br><br>
+</div>
+
+<div class="container">
+  <div class="row">
+    {% for post in posts %}
+    
+    <div class="col-sm" align="center" style="padding-bottom: 35px;">
+      <a href="{% url 'posts:show' post.id %}">
+        {% if post.photo %}
+          <img src = "{{ post.photo.url }}" style ="width: 250px; height: 250px"/>
+        {% endif %}
+      </a>
+    </div>
+    {% empty %}
+    <p>글이 없습니다.</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'account_login' %}">login</a>
+{% endif %}
+
+{% endblock %}
